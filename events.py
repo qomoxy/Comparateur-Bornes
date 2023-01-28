@@ -6,18 +6,17 @@ playerInput: list = [0, 0]
 def HandleEvents():
 
     global playerInput
-    playerMoveInput = UpdateMoveInput()
-
-    print(playerInput)
+    playerInput = UpdateMoveInput()
 
     for event in pygame.event.get():
         CheckQuit(event)
 
 
 def CheckQuit(event: pygame.event.Event):
-    if event.type == pygame.QUIT:
-        pygame.quit()
-        exit()
+    if event.type != pygame.QUIT:
+        return
+    pygame.quit()
+    exit()
 
 
 def UpdateMoveInput():
