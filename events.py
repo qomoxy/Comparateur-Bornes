@@ -29,8 +29,8 @@ def UpdateMoveInput():
     if keys[pygame.K_RIGHT]:
         newInput[0] += 1
     if keys[pygame.K_UP]:
-        newInput[1] += 1
-    if keys[pygame.K_DOWN]:
         newInput[1] -= 1
+    if keys[pygame.K_DOWN]:
+        newInput[1] += 1
 
     return newInput

@@ -4,7 +4,7 @@ import player
 
 pygame.init()
 
-pygame.display.set_mode((200, 200))  # , pygame.FULLSCREEN)
+screen = pygame.display.set_mode((600, 600))  # , pygame.FULLSCREEN)
 pygame.display.set_caption("Jeu de role")
 
 
@@ -19,8 +19,13 @@ print("\n\n\nclass events: quitter le jeu, deplacer le joueur, utiliser une atta
 
 while running:
     events.HandleEvents()
-    pygame.display.update()
+
+    screen.fill((255, 255, 255))
+
     player.Update(framerate)
+    player.Blit(screen)
+
+    pygame.display.flip()
     clock.tick(framerate)
 
 
