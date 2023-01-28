@@ -6,7 +6,7 @@ playerInput: list = [0, 0]
 def HandleEvents():
 
     global playerInput
-    playerInput = UpdateInput()
+    playerMoveInput = UpdateMoveInput()
 
     print(playerInput)
 
@@ -20,7 +20,7 @@ def CheckQuit(event: pygame.event.Event):
         exit()
 
 
-def UpdateInput():
+def UpdateMoveInput():
     newInput: list = [0, 0]
 
     keys = pygame.key.get_pressed()
