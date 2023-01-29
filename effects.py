@@ -22,18 +22,16 @@ class EffectManager():
 
 
 offenseEffect = {
-    "Bleed": EffectManager(pygame.image.load("test1.png"), 1, 4, appliedEffect=AppliedEffect(2, 5)),
-    "Poisoned": EffectManager(pygame.image.load("test1.png"), 0, 5, appliedEffect=AppliedEffect(2, 3)),
-    "Plage": EffectManager(pygame.image.load("test1.png"), 1, 3, appliedEffect=AppliedEffect(1, 4)),
-    "Burning": EffectManager(pygame.image.load("test1.png"), 1, 3, appliedEffect=AppliedEffect(1, 3)),
-    "Rot": EffectManager(pygame.image.load("test1.png"), 0, 2, appliedEffect=AppliedEffect(5, 8)),
-    "Cursed": EffectManager(pygame.image.load("test1.png"), 1, 5, appliedEffect=AppliedEffect(7, 11)),
-    "Doom": EffectManager(pygame.image.load("test1.png"), 1, 8, appliedEffect=AppliedEffect(2, 4))
+    "Bleed": EffectManager(pygame.image.load("test1.png"), minTurnsToApply=1, maxTurnsToApply=3, appliedEffect=AppliedEffect(minDamage=1, maxDamage=3)),
+    "Poisoned": EffectManager(pygame.image.load("test1.png"), minTurnsToApply=0, maxTurnsToApply=5, appliedEffect=AppliedEffect(minDamage=1, maxDamage=2)),
+    "Plague": EffectManager(pygame.image.load("test1.png"), minTurnsToApply=0, maxTurnsToApply=5, appliedEffect=AppliedEffect(minDamage=2, maxDamage=4)),
+    "Burning": EffectManager(pygame.image.load("test1.png"), minTurnsToApply=1, maxTurnsToApply=2, appliedEffect=AppliedEffect(minDamage=3, maxDamage=3)),
+    "Cursed": EffectManager(pygame.image.load("test1.png"), minTurnsToApply=8, maxTurnsToApply=12, appliedEffect=AppliedEffect(minDamage=2, maxDamage=4))
 }
 
 defenseEffect = {
-    "Heal": EffectManager(pygame.image.load("test1.png"), 1, 1, appliedEffect=AppliedEffect(minHeal=5, maxHeal=15)),
-    "Recovery": EffectManager(pygame.image.load("test1.png"), 1, 5, appliedEffect=AppliedEffect(minHeal=2, maxHeal=7)),
-    "Quick Heal": EffectManager(pygame.image.load("test1.png"), 1, 5, appliedEffect=AppliedEffect(minHeal=2, maxHeal=9)),
+    "Heal": EffectManager(pygame.image.load("test1.png"), minTurnsToApply=1, maxTurnsToApply=1, appliedEffect=AppliedEffect(minHeal=5, maxHeal=5)),
+    "Recovery": EffectManager(pygame.image.load("test1.png"), minTurnsToApply=3, maxTurnsToApply=5, appliedEffect=AppliedEffect(minHeal=2, maxHeal=2)),
+    "Quick Heal": EffectManager(pygame.image.load("test1.png"), minTurnsToApply=2, maxTurnsToApply=3, appliedEffect=AppliedEffect(minHeal=1, maxHeal=3)),
 
 }

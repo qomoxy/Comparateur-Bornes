@@ -9,7 +9,7 @@ import events
 pygame.init()
 
 screen = pygame.display.set_mode((600, 600))  # , pygame.FULLSCREEN)
-pygame.display.set_caption("Jeu de role")
+pygame.display.set_caption("Jeu de rôle")
 
 
 framerate: int = 60
