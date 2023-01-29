@@ -1,5 +1,6 @@
 import pygame
 import events
+import animations
 
 
 class Player():
@@ -7,7 +8,13 @@ class Player():
     moveCooldown: float = .3
     rect = pygame.Rect(0, 0, 10, 10)
 
+    def __init__(self, testAnimFrames: list[pygame.surface.Surface]):
+        self.testAnim = animations.Animation(
+            testAnimFrames, True, 1)
+
     def Update(self, framerate: int):
+
+        self.testAnim.Update(framerate)
 
         self.currentMoveCooldown -= 1/framerate
 
@@ -26,6 +33,5 @@ class Player():
             f"Le joueur va dans la direction: {events.playerInput} et est maintenant a [{self.rect.x} {self.rect.y}]")
 
     def Blit(self, screen: pygame.surface.Surface):
-        screen.blit(pygame.Surface(
-            # *50 est temporaire
-            [50, 50]), (self.rect.x * 50, self.rect.y * 50))
+        screen.blit(self.testAnim.CurrentAnimSprite(),
+                    (self.rect.x * 50, self.rect.y * 50))

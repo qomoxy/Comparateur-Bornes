@@ -13,14 +13,15 @@ running: bool = True
 
 clock = pygame.time.Clock()
 
-player = player.Player()
+player = player.Player([pygame.image.load("test1.png"),
+                       pygame.image.load("test2.png")])
 
 print("\n\n\nclass events: quitter le jeu, deplacer le joueur, utiliser une attaque etc\nclass joueur: mouvement du joueur (Fleches), vie etc\n SVP separez le code en plusieurs morceaux\n\n\n")
 
 while running:
     events.HandleEvents()
 
-    screen.fill((255, 255, 255))
+    screen.fill((0, 0, 0))
 
     player.Update(framerate)
     player.Blit(screen)
