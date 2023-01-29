@@ -8,9 +8,6 @@ class PlayerMovement():
     moveCooldown: float = .3
     rect = pygame.Rect(0, 0, 10, 10)
 
-    def __init__(self):
-        self.playerAnimator = animations.Animator()
-
     def UpdateMovement(self, framerate: int):
         self.currentMoveCooldown -= 1/framerate
 
