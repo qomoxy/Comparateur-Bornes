@@ -1,6 +1,10 @@
 import pygame as pygame
+from Player.player import Player
+from Player.playerAnimations import PlayerAnimation
+from Player.playerClass import PlayerClass
+from Player.playerMovement import PlayerMovement
+from animations import Animation
 import events
-import player
 
 pygame.init()
 
@@ -13,8 +17,17 @@ running: bool = True
 
 clock = pygame.time.Clock()
 
-player = player.Player([pygame.image.load("test1.png"),
-                       pygame.image.load("test2.png")])
+playerIdleAnim = Animation([pygame.image.load("test1.png"),
+                            pygame.image.load("test2.png")], True, 1)
+playerWalkAnim = Animation([pygame.image.load("test1.png"),
+                            pygame.image.load("test2.png")], True, .25)
+
+pClass = PlayerClass("Player", "Mage", "")
+pMovement = PlayerMovement()
+pAnimations = PlayerAnimation(playerIdleAnim, playerWalkAnim)
+
+player = Player(pClass, pMovement, pAnimations)
+
 
 print("\n\n\nclass events: quitter le jeu, deplacer le joueur, utiliser une attaque etc\nclass joueur: mouvement du joueur (Fleches), vie etc\nclass animations: creer une animation\n SVP separez le code en plusieurs morceaux\n\n\n")
 
@@ -24,7 +37,8 @@ while running:
     screen.fill((0, 0, 0))
 
     player.Update(framerate)
-    player.Blit(screen)
+    player.pAnims.Blit(screen, (player.pMovement.rect.x *
+                       50, player.pMovement.rect.y * 50))
 
     pygame.display.flip()
     clock.tick(framerate)
