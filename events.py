@@ -1,25 +1,35 @@
 import pygame as pygame
+from actions import Action
 
 playerInput: list = [0, 0]
 
+onMousePress: list[Action] = []
 
-def HandleEvents():
+
+def HandleEvents() -> None:
 
     global playerInput
     playerInput = UpdateMoveInput()
 
     for event in pygame.event.get():
+        CheckKeys(event)
         CheckQuit(event)
 
 
-def CheckQuit(event: pygame.event.Event):
+def CheckQuit(event: pygame.event.Event) -> None:
     if event.type != pygame.QUIT:
         return
     pygame.quit()
     exit()
 
 
-def UpdateMoveInput():
+def CheckKeys(event: pygame.event.Event) -> None:
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        for action in onMousePress:
+            action.Invoke()
+
+
+def UpdateMoveInput() -> list[int]:
     newInput: list = [0, 0]
 
     keys = pygame.key.get_pressed()

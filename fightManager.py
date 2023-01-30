@@ -7,5 +7,5 @@ states = ["Choose Attack", "AttackPreview"]
 currentState = states[0]
 
 
-def Test():
+def Test() -> None:
     print("TEST")

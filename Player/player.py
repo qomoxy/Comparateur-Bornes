@@ -1,14 +1,17 @@
 from Player.playerAnimations import PlayerAnimation
 from Player.playerClass import PlayerClass
-from Player.playerMovement import PlayerMovement
+from Player.playerAbilities import PlayerAbilitiesManager
+from Player.playerProperties import PlayerProperties
 
 
 class Player():
-    def __init__(self, pClass: PlayerClass, pMovement: PlayerMovement, pAnims: PlayerAnimation) -> None:
-        self.pClass = pClass
-        self.pMovement = pMovement
-        self.pAnims = pAnims
+
+    def __init__(self) -> None:
+        self.pClass = PlayerClass("Player", "Mage", "")
+        self.pProperties = PlayerProperties()
+        self.pAbilities = PlayerAbilitiesManager(self.pProperties)
+        self.pAnims = PlayerAnimation()
 
     def Update(self, framerate: int):
-        self.pMovement.UpdateMovement(framerate)
         self.pAnims.UpdateAnimations(framerate)
+        self.pAbilities.Update()

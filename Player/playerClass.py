@@ -15,21 +15,24 @@ class PlayerClass:
             self.damage = random.randint(8, 20)
             self.defense = random.randint(0, 5)
             self.speed = random.randint(2, 5)
+
         elif classe == "Swordman":
             self.health = 20
             self.damage = random.randint(5, 15)
             self.defense = random.randint(3, 10)
             self.speed = random.randint(5, 10)
-        elif classe == "Murder":
+
+        elif classe == "Assasin":
             self.health = 15
             self.damage = random.randint(8, 19)
             self.defense = random.randint(0, 5)
             self.speed = random.randint(5, 15)
-        else:
+
+        else:  # classe == "Tank"
             self.health = 40
             self.damage = random.randint(3, 7)
             self.defense = random.randint(10, 25)
             self.speed = random.randint(0, 4)
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # test
         return f"{self.name} voici vos compétences: \n health : {self.health} \n damage : {self.damage} \n defense : {self.defense} \n speed : {self.speed}"

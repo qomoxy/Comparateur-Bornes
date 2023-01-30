@@ -1,5 +1,4 @@
 import pygame
-import events
 import animations
 
 
@@ -8,11 +7,15 @@ class PlayerAnimation():
     moveCooldown: float = .3
     rect = pygame.Rect(0, 0, 10, 10)
 
-    def __init__(self, idleAnim: animations.Animation, walkAnim: animations.Animation):
-        self.idleAnim = idleAnim
-        self.walkAnim = walkAnim
+    idleAnim = animations.Animation([pygame.image.load("Sprites/test1.png"),
+                                     pygame.image.load("Sprites/test2.png")], True, 1)
+
+    walkAnim = animations.Animation([pygame.image.load("Sprites/test1.png"),
+                                     pygame.image.load("Sprites/test2.png")], True, 1)
+
+    def __init__(self):
         self.playerAnimator = animations.Animator()
-        self.playerAnimator.SetAnimation(idleAnim)
+        self.playerAnimator.SetAnimation(self.idleAnim)
 
     def UpdateAnimations(self, framerate: int):
         self.playerAnimator.Update(framerate)
