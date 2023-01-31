@@ -1,7 +1,8 @@
 import random
+from entity import Entity
 
 
-class PlayerClass:
+class PlayerClass(Entity):
 
     def __init__(self, name: str, classe: str, info: str):
         self.name = name

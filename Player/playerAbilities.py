@@ -1,15 +1,17 @@
 from time import sleep
 import pygame
+from Abilities import Ability
+from effects import EffectManager
 import events
 from actions import Action
 from Player.playerProperties import PlayerProperties
 import grid
-import globalInfo
 import fightManager
 
 
-class PlayerAbility():
-    def __init__(self, pProperties: PlayerProperties) -> None:
+class PlayerAbility(Ability):
+    def __init__(self, pProperties: PlayerProperties, speed: tuple[int, int], name: str, info: str, abilityEffects: EffectManager, cellColor: str = "Red", shape: list[str] = ...) -> None:
+        super().__init__(speed, name, info, abilityEffects, cellColor, shape)
         self.pProperties = pProperties
 
     selected = False
@@ -28,17 +30,16 @@ class PlayerAbility():
 
 class MovementAbility(PlayerAbility):
 
-    def __init__(self, pProperties: PlayerProperties, shapeString: list[str], color: str = "Blue") -> None:
-        super().__init__(pProperties)
-        self.shapeCells = grid.PositionsToCells(grid.ShapeToPositions(
-            shapeString), color)
+    def __init__(self, pProperties: PlayerProperties, speed: tuple[int, int], name: str, info: str, abilityEffects: EffectManager, cellColor: str = "Red", shape: list[str] = ...) -> None:
+        super().__init__(pProperties, speed, name, info, abilityEffects, cellColor, shape)
         events.onMousePress += [Action(self, "MoveToMouse")]
+        self.shapeCellPositions = grid.ShapeToPositions(shape)
 
     def WhileSelected(self) -> None:
-        grid.AddCells([grid.CellInfo((cell.position[0] + self.pProperties.rect.x,
-                                      cell.position[1] + self.pProperties.rect.y),
-                                     cell.color)
-                      for cell in self.shapeCells])
+        grid.AddCells([grid.CellInfo((cellPosition[0] + self.pProperties.rect.x,
+                                      cellPosition[1] + self.pProperties.rect.y),
+                                     self.cellColor)
+                      for cellPosition in self.shapeCellPositions])
 
     def MoveToMouse(self):
         if not self.selected:
@@ -62,11 +63,11 @@ class PlayerAbilitiesManager():
 
     def __init__(self, pProperties: PlayerProperties) -> None:
         self.pProperties = pProperties
-        self.abilities = [MovementAbility(pProperties, ["••X••",
-                                                        "•XXX•",
-                                                        "XXPXX",
-                                                        "•XXX•",
-                                                        "••X••"])]
+        self.abilities = [MovementAbility(pProperties, speed=(5, 8), name="Move", info="Move to new position", abilityEffects=EffectManager([]), cellColor="Blue", shape=["••X••",
+                                                                                                                                                                          "•XXX•",
+                                                                                                                                                                          "XXPXX",
+                                                                                                                                                                          "•XXX•",
+                                                                                                                                                                          "••X••"])]
         self.SelectAbility(0)
 
     def SelectAbility(self, abilityIndex: int):
