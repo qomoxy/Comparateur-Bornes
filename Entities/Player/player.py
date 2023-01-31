@@ -10,7 +10,7 @@ class Player():
 
     def __init__(self) -> None:
         self.pClass = PlayerClass("Player", "Mage", "")
-        self.pEntity = Entity(15, name="Player", info="The player",
+        self.pEntity = Entity(15, (256, 256), name="Player", info="The player",
                               baseSpeed=(3, 6), baseDefense=(3, 6), effectsToApply=EffectManager([]))
         self.pAbilitiesManager = PlayerAbilitiesManager(self.pEntity)
         self.pAnims = PlayerAnimation()

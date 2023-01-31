@@ -5,6 +5,7 @@ from Entities.entity import Entity
 import Base.events as events
 from Base.actions import Action
 import grid
+from fightManager import DoMoves
 
 
 class PlayerAbility(abilities.Ability):
@@ -48,6 +49,8 @@ class PlayerMovementAbility(PlayerAbility):
             return
 
         print("Moving")
+
+        DoMoves()
 
         self.entity.rect = pygame.Rect(
             targetPos[0], targetPos[1], self.entity.rect.width, self.entity.rect.height)

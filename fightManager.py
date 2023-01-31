@@ -20,27 +20,28 @@ def SortMovesBySpeed(movesToSort: list[Move]) -> list[Move]:
 
 
 def DoMoves():
-    global movesToCall, moveToCallIndex
+    global __movesToCall, __moveToCallIndex, currentState
 
-    movesToCall = SortMovesBySpeed(movesToExecute)
-    if len(movesToCall) == 0:
+    __movesToCall = SortMovesBySpeed(movesToExecute)
+    if len(__movesToCall) == 0:
         return
 
-    moveToCallIndex = 0
+    __moveToCallIndex = 0
+    currentState = states[1]
     CallNextMove()
 
 
 def CallNextMove():
-    global moveToCallIndex, currentState
+    global __moveToCallIndex, currentState
 
-    if moveToCallIndex >= len(movesToCall):
+    if __moveToCallIndex >= len(__movesToCall):
         currentState = states[0]
-        moveToCallIndex = 0
+        __moveToCallIndex = 0
         return
 
-    moveToCallIndex += 1
-    movesToCall[moveToCallIndex - 1].moveToDo.Invoke()
+    __moveToCallIndex += 1
+    __movesToCall[__moveToCallIndex - 1].moveToDo.Invoke()
 
 
-movesToCall: list[Move] = []
-moveToCallIndex: int = 0
+__movesToCall: list[Move] = []
+__moveToCallIndex: int = 0

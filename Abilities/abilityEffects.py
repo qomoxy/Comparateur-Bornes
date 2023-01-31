@@ -4,7 +4,7 @@ from Base.globalInfo import TupleToRandom
 
 
 class Effect():
-    def __init__(self, damage: tuple[int, int], healing: tuple[int, int], timesToApply: tuple[int, int] = (1, 1), probabilityToApply: float = .9) -> None:
+    def __init__(self, damage: tuple[int, int] = (2, 4), healing: tuple[int, int] = (0, 0), timesToApply: tuple[int, int] = (1, 1), probabilityToApply: float = .9) -> None:
         self.damage: int = TupleToRandom(damage)
         self.healing: int = TupleToRandom(healing)
         self.timesToApply: int = TupleToRandom(timesToApply)

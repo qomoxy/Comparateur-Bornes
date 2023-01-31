@@ -2,7 +2,6 @@ import pygame
 from Entities.entity import Entity
 from Base.globalInfo import TupleToRandom
 from Abilities.abilityEffects import EffectManager
-import grid
 
 
 class Ability():

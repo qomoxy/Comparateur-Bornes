@@ -9,11 +9,8 @@ class PlayerAnimation():
     rect = pygame.Rect(0, 0, 10, 10)
 
     def __init__(self):
-        self.idleAnim = animations.Animation([pygame.image.load("Sprites/test1.png"),
-                                              pygame.image.load("Sprites/test2.png")], False, 1, Action(self, "Test"))
-
-        self.walkAnim = animations.Animation([pygame.image.load("Sprites/test1.png"),
-                                              pygame.image.load("Sprites/test2.png")], True, 1, Action(self, "Test"))
+        self.idleAnim = animations.Animation(spriteSheet=pygame.image.load(
+            "Sprites/Player/player test sprite.png"), loop=True, length=1, frameCount=(4, 1), onAnimationFinishAction=Action(self, "Test"))
 
         self.playerAnimator = animations.Animator()
         self.playerAnimator.SetAnimation(self.idleAnim)
