@@ -62,11 +62,11 @@ class PlayerAbilitiesManager():
 
     def __init__(self, pProperties: PlayerProperties) -> None:
         self.pProperties = pProperties
-        self.abilities = [MovementAbility(pProperties, ["XXXXX"
-                                                        "XXXXX",
+        self.abilities = [MovementAbility(pProperties, ["••X••",
+                                                        "•XXX•",
                                                         "XXPXX",
-                                                        "XXXXX",
-                                                        "XXXXX"])]
+                                                        "•XXX•",
+                                                        "••X••"])]
         self.SelectAbility(0)
 
     def SelectAbility(self, abilityIndex: int):

@@ -64,7 +64,7 @@ def ShapeToPositions(shape: list[str], offset: tuple[int, int] = (0, 0)) -> list
                 center = (i * globalInfo.gridSize, j * globalInfo.gridSize)
             elif value == "X":
                 positions.append(
-                    (i * globalInfo.gridSize + offset[0], j * globalInfo.gridSize + offset[1]))
+                    (j * globalInfo.gridSize + offset[0], i * globalInfo.gridSize + offset[1]))
 
     if center != (0, 0):
         for i in range(len(positions)):
