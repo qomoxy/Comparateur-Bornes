@@ -1,29 +1,40 @@
 import pygame
 import math
 from globalInfo import ScaleSprite
+from actions import Action
 
 
 class Animation():
 
-    def __init__(self, frames: list[pygame.surface.Surface], loop: bool, length: float) -> None:
+    def __init__(self, frames: list[pygame.surface.Surface], loop: bool, length: float, onAnimationFinish=None) -> None:
         self.loop: bool = loop
         self.length: float = length
         self.frames: list[pygame.surface.Surface] = RescaleFrames(
             frames + [frames[-1]])
+        self.onAnimationFinish = onAnimationFinish
 
 
 class Animator():
     advancement: float = 0
     currentFrame: int = 0
+    animationFinished: bool = False
 
     def SetAnimation(self, anim: Animation) -> None:
         self.anim = anim
         self.advancement = 0
+        self.animationFinished = False
 
     def Update(self, framerate: int) -> None:
+        if self.animationFinished:
+            return
 
-        if self.anim.loop and self.advancement == .999:
-            self.advancement = 0
+        if self.advancement == .999:
+            if self.anim.loop:
+                self.advancement = 0
+            else:
+                self.animationFinished = True
+                if self.anim.onAnimationFinish != None:
+                    self.anim.onAnimationFinish.Invoke()
 
         self.advancement += 1 / framerate / self.anim.length
         self.advancement = min(self.advancement, .999)

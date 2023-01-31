@@ -1,9 +1,11 @@
+from time import sleep
 import pygame
 import events
 from actions import Action
 from Player.playerProperties import PlayerProperties
 import grid
 import globalInfo
+import fightManager
 
 
 class PlayerAbility():
@@ -25,23 +27,24 @@ class PlayerAbility():
 
 
 class MovementAbility(PlayerAbility):
-    def __init__(self, pProperties: PlayerProperties) -> None:
+
+    def __init__(self, pProperties: PlayerProperties, shapeString: list[str], color: str = "Blue") -> None:
         super().__init__(pProperties)
+        self.shapeCells = grid.PositionsToCells(grid.ShapeToPositions(
+            shapeString), color)
         events.onMousePress += [Action(self, "MoveToMouse")]
 
     def WhileSelected(self) -> None:
-        grid.AddColoredCell(
-            (self.pProperties.rect.x, self.pProperties.rect.y + globalInfo.gridSize), "Blue")
-        grid.AddColoredCell(
-            (self.pProperties.rect.x, self.pProperties.rect.y - globalInfo.gridSize), "Blue")
-        grid.AddColoredCell(
-            (self.pProperties.rect.x + globalInfo.gridSize, self.pProperties.rect.y), "Blue")
-        grid.AddColoredCell(
-            (self.pProperties.rect.x - globalInfo.gridSize, self.pProperties.rect.y), "Blue")
+        grid.AddCells([grid.CellInfo((cell.position[0] + self.pProperties.rect.x,
+                                      cell.position[1] + self.pProperties.rect.y),
+                                     cell.color)
+                      for cell in self.shapeCells])
 
     def MoveToMouse(self):
         if not self.selected:
             return
+
+        fightManager.DoMoves()
 
         mousePos: tuple[int, int] = pygame.mouse.get_pos()
 
@@ -59,7 +62,11 @@ class PlayerAbilitiesManager():
 
     def __init__(self, pProperties: PlayerProperties) -> None:
         self.pProperties = pProperties
-        self.abilities = [MovementAbility(pProperties)]
+        self.abilities = [MovementAbility(pProperties, ["XXXXX"
+                                                        "XXXXX",
+                                                        "XXPXX",
+                                                        "XXXXX",
+                                                        "XXXXX"])]
         self.SelectAbility(0)
 
     def SelectAbility(self, abilityIndex: int):

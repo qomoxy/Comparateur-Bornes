@@ -1,5 +1,6 @@
 import pygame
 import animations
+from actions import Action
 
 
 class PlayerAnimation():
@@ -7,18 +8,21 @@ class PlayerAnimation():
     moveCooldown: float = .3
     rect = pygame.Rect(0, 0, 10, 10)
 
-    idleAnim = animations.Animation([pygame.image.load("Sprites/test1.png"),
-                                     pygame.image.load("Sprites/test2.png")], True, 1)
-
-    walkAnim = animations.Animation([pygame.image.load("Sprites/test1.png"),
-                                     pygame.image.load("Sprites/test2.png")], True, 1)
-
     def __init__(self):
+        self.idleAnim = animations.Animation([pygame.image.load("Sprites/test1.png"),
+                                              pygame.image.load("Sprites/test2.png")], False, 1, Action(self, "Test"))
+
+        self.walkAnim = animations.Animation([pygame.image.load("Sprites/test1.png"),
+                                              pygame.image.load("Sprites/test2.png")], True, 1, Action(self, "Test"))
+
         self.playerAnimator = animations.Animator()
         self.playerAnimator.SetAnimation(self.idleAnim)
 
     def UpdateAnimations(self, framerate: int):
         self.playerAnimator.Update(framerate)
+
+    def Test(self):
+        print("Animation Finished")
 
     def SetAnimation(self, animation: animations.Animation):
         self.playerAnimator.SetAnimation(animation)

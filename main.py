@@ -2,6 +2,7 @@ import pygame as pygame
 from Player.player import Player
 import events
 import grid
+import fightManager
 
 pygame.init()
 

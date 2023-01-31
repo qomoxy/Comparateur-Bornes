@@ -1,6 +1,7 @@
 from math import floor
 import pygame
 import globalInfo
+
 gridSprite = globalInfo.ScaleSprite(pygame.image.load("Sprites/Grid/Grid.png"))
 greenGridSprite = globalInfo.ScaleSprite(
     pygame.image.load("Sprites/Grid/Grid-Green.png"))
@@ -22,9 +23,15 @@ class CellInfo():
 cellsToAddNext: list[CellInfo] = []
 
 
-def AddColoredCell(clampedPosition: tuple[int, int], color: str):
+def AddCell(cell: CellInfo):
     global cellsToAddNext
-    cellsToAddNext.append(CellInfo(clampedPosition, color))
+    cellsToAddNext.append(cell)
+
+
+def AddCells(cells: list[CellInfo]):
+    global cellsToAddNext
+    for cell in cells:
+        cellsToAddNext.append(cell)
 
 
 def BlitGrid(screen: pygame.surface.Surface) -> None:
@@ -44,3 +51,29 @@ def BlitGrid(screen: pygame.surface.Surface) -> None:
 def ClampToGrid(coordinates: tuple[int, int]) -> tuple[int, int]:
     return (floor(coordinates[0] / globalInfo.gridSize) * globalInfo.gridSize,
             floor(coordinates[1] / globalInfo.gridSize) * globalInfo.gridSize)
+
+
+def ShapeToPositions(shape: list[str], offset: tuple[int, int] = (0, 0)) -> list[tuple[int, int]]:
+    center: tuple[int, int] = (0, 0)
+    positions: list[tuple[int, int]] = []
+
+    for i in range(len(shape)):
+        for j in range(len(shape[i])):
+            value = shape[i][j]
+            if value == "P":
+                center = (i * globalInfo.gridSize, j * globalInfo.gridSize)
+            elif value == "X":
+                positions.append(
+                    (i * globalInfo.gridSize + offset[0], j * globalInfo.gridSize + offset[1]))
+
+    if center != (0, 0):
+        for i in range(len(positions)):
+            positions[i] = (positions[i][0] - center[0],
+                            positions[i][1] - center[1])
+
+    return positions
+
+
+def PositionsToCells(positions: list[tuple[int, int]], color: str):
+    return [CellInfo(position, color)
+            for position in positions]
