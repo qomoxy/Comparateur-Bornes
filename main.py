@@ -1,8 +1,7 @@
 import pygame as pygame
-from Player.player import Player
-import events
+from Entities.Player.player import Player
+import Base.events
 import grid
-import fightManager
 
 pygame.init()
 
@@ -20,7 +19,7 @@ player = Player()
 print("\n\n\nclass events: quitter le jeu, deplacer le joueur, utiliser une attaque etc\nclass joueur: mouvement du joueur (Fleches), vie etc\nclass animations: creer une animation\n SVP separez le code en plusieurs morceaux\n\n\n")
 
 while running:
-    events.HandleEvents()
+    Base.events.HandleEvents()
 
     screen.fill((62, 137, 72))
     grid.BlitGrid(screen)

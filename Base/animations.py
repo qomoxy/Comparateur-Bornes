@@ -1,7 +1,7 @@
 import pygame
 import math
-from globalInfo import ScaleSprite
-from actions import Action
+from Base.globalInfo import ScaleSprite
+from Base.actions import Action
 
 
 class Animation():

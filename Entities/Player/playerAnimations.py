@@ -1,6 +1,6 @@
 import pygame
-import animations
-from actions import Action
+import Base.animations as animations
+from Base.actions import Action
 
 
 class PlayerAnimation():

@@ -1,6 +1,6 @@
 import random
 import pygame
-from globalInfo import TupleToRandom
+from Base.globalInfo import TupleToRandom
 
 
 class Effect():

@@ -1,5 +1,5 @@
 import random
-from entity import Entity
+from Entities.entity import Entity
 
 
 class PlayerClass(Entity):

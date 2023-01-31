@@ -1,5 +1,5 @@
 import pygame as pygame
-from actions import Action
+from Base.actions import Action
 
 playerInput: list = [0, 0]
 

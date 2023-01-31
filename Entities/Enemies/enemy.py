@@ -1,3 +1,4 @@
+# a refaire: inheritance avec "Entity"
 class Enemy:
 
     def __init__(self, name: str, classe: str, type: str, description: str, health: int, damage: int, defense: int, speed: int, loot: str) -> None:

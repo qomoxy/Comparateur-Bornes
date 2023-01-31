@@ -1,6 +1,6 @@
 from math import floor
 import pygame
-import globalInfo
+import Base.globalInfo as globalInfo
 
 gridSprite = globalInfo.ScaleSprite(pygame.image.load("Sprites/Grid/Grid.png"))
 greenGridSprite = globalInfo.ScaleSprite(
