@@ -27,7 +27,7 @@ while running:
 
     player.Update(framerate)
     player.pAnims.Blit(
-        screen, (player.pProperties.rect.x, player.pProperties.rect.y))
+        screen, (player.pEntity.rect.x, player.pEntity.rect.y))
 
     pygame.display.flip()
     clock.tick(framerate)
