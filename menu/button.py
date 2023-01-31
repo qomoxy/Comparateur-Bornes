@@ -1,5 +1,7 @@
 import pygame
-import sys
+from main import screen
+
+gui_font = pygame.font.Font(None, 30)
 
 
 class Button:
@@ -50,10 +52,6 @@ class Button:
             self.top_color = '#475F77'
 
 
-button1 = Button('Click me', 200, 40, (200, 250), 5)
+button1 = Button('Play', 200, 40, (200, 250), 5)
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+
