@@ -1,5 +1,9 @@
 import pygame
+from pygame.locals import *
+pygame.init()
 
+
+width,height = 64*16, 64*9
 
 class Background(pygame.sprite.Sprite):
     def __init__(self, image_file, location):
@@ -8,14 +12,23 @@ class Background(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location
 
-
 def mainMenu():
-    screen = pygame.display.set_mode((64*16, 64*9))
-    BackGround = Background('background_image.png', [0, 0])
+    window = pygame.display.set_mode((width,height))
+    BackGround = Background('sprites/background_menu.png', [0, 0])
 
-    screen.fill([255, 255, 255])
-    # screen.blit(BackGround.image, BackGround.rect)
 
-    run = True
-    while run:
+    runing = True
+    while runing:
         mousePose = pygame.mouse.get_pos()
+        
+        window.blit(pygame.transform.scale(BackGround.image,(width,height)),(0,0))
+        
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                runing = False
+        
+        pygame.display.update()
+        
+    pygame.quit()
+    
+mainMenu()
