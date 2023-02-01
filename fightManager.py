@@ -1,5 +1,6 @@
 from Base.actions import Action
 import operator
+import grid
 
 
 class Move():
@@ -25,7 +26,6 @@ def DoMoves():
     __movesToCall = SortMovesBySpeed(movesToExecute)
     if len(__movesToCall) == 0:
         return
-
     __moveToCallIndex = 0
     currentState = states[1]
     CallNextMove()

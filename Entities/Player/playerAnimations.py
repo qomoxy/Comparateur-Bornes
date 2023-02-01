@@ -10,7 +10,7 @@ class PlayerAnimation():
 
     def __init__(self):
         self.idleAnim = animations.Animation(spriteSheet=pygame.image.load(
-            "Sprites/Player/player test sprite.png"), loop=True, length=1, frameCount=(4, 1), onAnimationFinishAction=Action(self, "Test"))
+            "Sprites/Player/player test sprite.png"), loop=True, length=1, sheetSpriteCount=(4, 1), onAnimationFinishAction=Action(self, "Test"))
 
         self.playerAnimator = animations.Animator()
         self.playerAnimator.SetAnimation(self.idleAnim)
@@ -23,7 +23,3 @@ class PlayerAnimation():
 
     def SetAnimation(self, animation: animations.Animation):
         self.playerAnimator.SetAnimation(animation)
-
-    def Blit(self, screen: pygame.surface.Surface, position: tuple):
-        screen.blit(self.playerAnimator.CurrentAnimSprite(),
-                    position)

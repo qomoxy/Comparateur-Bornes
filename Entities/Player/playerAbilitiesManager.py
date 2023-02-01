@@ -48,7 +48,7 @@ class PlayerMovementAbility(PlayerAbility):
         else:
             return
 
-        print("Moving")
+        print(f"Moving Player to {targetPos}")
 
         DoMoves()
 

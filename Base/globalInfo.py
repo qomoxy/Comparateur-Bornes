@@ -6,7 +6,8 @@ gridSize = 64
 
 
 def ScaleSprite(sprite: pygame.surface.Surface):
-    return pygame.transform.scale(sprite, (gridSize, gridSize))
+    ratioYoverX = sprite.get_height() / sprite.get_width()
+    return pygame.transform.scale(sprite, (gridSize, ratioYoverX * gridSize))
 
 
 def TupleToRandom(tuple: tuple[int, int]):
