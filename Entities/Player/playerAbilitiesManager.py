@@ -1,6 +1,7 @@
 import pygame
 import Abilities.abilities as abilities
 from Abilities.abilityEffects import EffectManager
+from Base.animations import Animation
 from Entities.entity import Entity
 import Base.events as events
 from Base.actions import Action
@@ -11,7 +12,8 @@ from fightManager import DoMoves
 class PlayerAbility(abilities.Ability):
     def __init__(self, baseAbility: abilities.Ability) -> None:
         super().__init__(baseAbility.baseSpeed, baseAbility.name,
-                         baseAbility.info, baseAbility.abilityEffects,
+                         baseAbility.info, baseAbility.animation,
+                         baseAbility.abilityEffects,
                          baseAbility.cellColor, baseAbility.shape)
 
     selected = False
@@ -68,11 +70,13 @@ class PlayerAbilitiesManager():
 
     def __init__(self, pEntity: Entity) -> None:
         self.pEntity = pEntity
-        movementAbility = PlayerMovementAbility(abilities.Ability((3, 6), name="Move", info="Move the player", abilityEffects=EffectManager([]), cellColor="Blue", shape=["••X••",
-                                                                                                                                                                          "•XXX•",
-                                                                                                                                                                          "XXPXX",
-                                                                                                                                                                          "•XXX•",
-                                                                                                                                                                          "••X••"]),
+        movementAnim = Animation(pygame.image.load(
+            "Sprites/Player/player test sprite.png"), False, 1, (4, 1), (0, 2))
+        movementAbility = PlayerMovementAbility(abilities.Ability((3, 6), name="Move", info="Move the player", animation=movementAnim, abilityEffects=EffectManager([]), cellColor="Blue", shape=["••X••",
+                                                                                                                                                                                                  "•XXX•",
+                                                                                                                                                                                                  "XXPXX",
+                                                                                                                                                                                                  "•XXX•",
+                                                                                                                                                                                                  "••X••"]),
                                                 pEntity)
         self.abilities: list[PlayerAbility] = [movementAbility]
         self.SelectAbility(0)
