@@ -40,7 +40,7 @@ enemies = {
 
 
 class Enemy():
-    doingMove = False
+    doingAbility = False
 
     def __init__(self, properties: EnemyProperties, startPosition: tuple[int, int]) -> None:
         self.entity = properties.entity
@@ -48,18 +48,19 @@ class Enemy():
 
         for ability in properties.entity.abilities:
             ability.animation.onAnimationFinishAction = Action(
-                self, "FinishedMove")
+                self, "FinishedAbility")
 
         self.currentAbility: Ability = properties.entity.abilities[0]
         self.abilityShapePositions: list[tuple[int, int]] = []
-        movesToExecute.append(Move(Action(self, "DoMove"), self.entity.speed))
+        movesToExecute.append(
+            Move(Action(self, "DoAbility"), self.entity.speed))
 
         self.idleAnimation: Animation = properties.idleAnimation
         self.animator: Animator = Animator()
         self.animator.SetAnimation(properties.idleAnimation)
 
-    def DoMove(self):
-        self.doingMove = True
+    def DoAbility(self):
+        self.doingAbility = True
         abilityToDo: Ability = self.entity.abilities[randint(
             0, len(self.entity.abilities) - 1)]
 
@@ -78,15 +79,15 @@ class Enemy():
 
         self.currentAbility = abilityToDo
 
-    def FinishedMove(self):
-        if not self.doingMove:
+    def FinishedAbility(self):
+        if not self.doingAbility:
             return
-        self.doingMove = False
+        self.doingAbility = False
         CallNextMove()
 
     def Update(self, framerate: int):
         self.animator.Update(framerate)
-        if not self.doingMove:
+        if not self.doingAbility:
             return
 
         grid.AddCells([grid.CellInfo(abilityShapePosition, self.currentAbility.cellColor)
