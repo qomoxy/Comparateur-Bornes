@@ -52,7 +52,7 @@ class PlayerMovementAbility(PlayerAbility):
 
         print(f"Moving Player to {targetPos}")
 
-        DoMoves()
+        # DoAbility()
 
         self.entity.rect = pygame.Rect(
             targetPos[0], targetPos[1], self.entity.rect.width, self.entity.rect.height)

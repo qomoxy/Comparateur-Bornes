@@ -53,6 +53,7 @@ def ClampToGrid(coordinates: tuple[int, int]) -> tuple[int, int]:
             floor(coordinates[1] / globalInfo.gridSize) * globalInfo.gridSize)
 
 
+# For shapes, use "🟥" for a cell, "⬛" for the center of the shape,"🔲" for the filled center of the shape, and "⬜" for empty space
 def ShapeToPositions(shape: list[str], offset: tuple[int, int] = (0, 0)) -> list[tuple[int, int]]:
     center: tuple[int, int] = (0, 0)
     positions: list[tuple[int, int]] = []
@@ -60,9 +61,9 @@ def ShapeToPositions(shape: list[str], offset: tuple[int, int] = (0, 0)) -> list
     for i in range(len(shape)):
         for j in range(len(shape[i])):
             value = shape[i][j]
-            if value == "P":
+            if value == "⬛" or value == "🔲":
                 center = (i * globalInfo.gridSize, j * globalInfo.gridSize)
-            elif value == "X":
+            if value == "🟥" or value == "🔲":
                 positions.append(
                     (j * globalInfo.gridSize + offset[0], i * globalInfo.gridSize + offset[1]))
 

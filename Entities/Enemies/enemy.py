@@ -59,32 +59,6 @@ class Enemy():
         self.animator: Animator = Animator()
         self.animator.SetAnimation(properties.idleAnimation)
 
-    def DoAbility(self):
-        self.doingAbility = True
-        abilityToDo: Ability = self.entity.abilities[randint(
-            0, len(self.entity.abilities) - 1)]
-
-        __possibleAbilityPositions = grid.ShapeToPositions(
-            abilityToDo.shape, self.entity.rect.topleft)
-        self.abilityShapePositions = __possibleAbilityPositions
-
-        __positionToUse = __possibleAbilityPositions[randint(
-            0, len(__possibleAbilityPositions) - 1)]
-
-        print(f"{self.entity.name} using ability at {__positionToUse}")
-
-        self.animator.SetAnimation(abilityToDo.animation)
-
-        #self.entity.rect.topleft = __positionToUse
-
-        self.currentAbility = abilityToDo
-
-    def FinishedAbility(self):
-        if not self.doingAbility:
-            return
-        self.doingAbility = False
-        CallNextMove()
-
     def Update(self, framerate: int):
         self.animator.Update(framerate)
         if not self.doingAbility:

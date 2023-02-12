@@ -25,7 +25,7 @@ class Animation():
         startIndices: tuple[int, int] = self.GetIndicesOnSheetByCount(
             sheetSpriteCount, startEndFrames[0])
 
-        # get las frame
+        # get last frame
         if startEndFrames[1] == 0:
             endIndices: tuple[int, int] = (
                 sheetSpriteCount[1] - 1, sheetSpriteCount[0] - 1)
