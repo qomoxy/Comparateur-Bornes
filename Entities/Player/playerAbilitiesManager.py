@@ -1,3 +1,4 @@
+'''
 import pygame
 import Abilities.abilities as abilities
 from Abilities.abilityEffects import EffectManager
@@ -94,3 +95,4 @@ class PlayerAbilitiesManager():
     def Update(self):
         if self.selectedAbility != None:
             self.selectedAbility.WhileSelected()
+'''

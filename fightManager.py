@@ -1,47 +1,38 @@
-from Base.actions import Action
-import operator
+from Abilities.abilities import Ability
+from Entities.Enemies.enemy import Enemy
+from Entities.Player.player import Player
 import grid
 
-
-class Move():
-    def __init__(self, moveToDo: Action, speed: int) -> None:
-        self.moveToDo = moveToDo
-        self.speed = speed
+__turnOrder: list[Ability] = []
+__turnIndex: int = 0
 
 
-states = ["Choose Move", "Preview Moves"]
-currentState = states[0]
-
-onChoose: list[Action] = []
-movesToExecute: list[Move] = []
+def PlayerChoosingAbility():
+    print("Player is choosing ability")
 
 
-def SortMovesBySpeed(movesToSort: list[Move]) -> list[Move]:
-    return sorted(movesToSort, key=operator.attrgetter('speed'), reverse=True)
+def DoTurns(playerAbility: Ability, playerAbilitySpeed: int, enemyAbilities: list[Ability], enemySpeeds: list[int]):
+    global __turnOrder, __turnIndex
+
+    __allAbilities = [playerAbility] + enemyAbilities
+    __allSpeeds = [playerAbilitySpeed] + enemySpeeds
+    __allAbilitiesAndSpeeds = dict(zip(__allAbilities, __allSpeeds))
+
+    __turnOrder = SortTurnOrder(__allAbilitiesAndSpeeds)
+    __turnIndex = 0
+
+# create a class that contains the ability to do and the speed of the entity that will do it
 
 
-def DoMoves():
-    global __movesToCall, __moveToCallIndex, currentState
+def SortTurnOrder(__unsortedAbilitiesAndSpeeds: dict[Ability, int]) -> list[Ability]:
+    # sort the abilities by speed
+    __sortedAbilitiesAndSpeeds = sorted(
+        __unsortedAbilitiesAndSpeeds.items(), key=lambda item: item[1])
+    # return the abilities in the order they will be used
+    return [ability for ability, _ in __sortedAbilitiesAndSpeeds]
 
-    __movesToCall = SortMovesBySpeed(movesToExecute)
-    if len(__movesToCall) == 0:
+
+def TurnFinished():
+    global __turnIndex
+    if __turnIndex >= len(__turnOrder):
         return
-    __moveToCallIndex = 0
-    currentState = states[1]
-    CallNextMove()
-
-
-def CallNextMove():
-    global __moveToCallIndex, currentState
-
-    if __moveToCallIndex >= len(__movesToCall):
-        currentState = states[0]
-        __moveToCallIndex = 0
-        return
-
-    __moveToCallIndex += 1
-    __movesToCall[__moveToCallIndex - 1].moveToDo.Invoke()
-
-
-__movesToCall: list[Move] = []
-__moveToCallIndex: int = 0

@@ -1,9 +1,8 @@
 import pygame
-from pygame.locals import *
 from Base.actions import Action
 
 
-class Button():
+class Button:
     def __init__(self, x: int, y: int, imageFolder: str, scale, actionOnClick: Action):
         self.imageLoad = pygame.image.load(imageFolder)
         self.width: int = self.imageLoad.get_width()
@@ -19,13 +18,12 @@ class Button():
     def draw(self, surface) -> None:
         pos = pygame.mouse.get_pos()
 
-        if self.rect.collidepoint(pos):
-            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-                self.clicked = True
-                self.actionOnClick.Invoke()
-                print("True")
+        if (self.rect.collidepoint(pos) and pygame.mouse.get_pressed()[0] == 1 and self.clicked is False):
+            self.clicked = True
+            self.actionOnClick.Invoke()
+            print("True")
 
         if pygame.mouse.get_pressed()[0] == 0:
             self.clicked = False
 
-        surface.blit(self.image, (self.coordonnate))
+        surface.blit(self.image, self.coordonnate)

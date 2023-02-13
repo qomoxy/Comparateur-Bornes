@@ -1,8 +1,8 @@
 import pygame as pygame
 from Entities.Player.player import Player
-from Entities.Enemies.enemy import Enemy, enemies
+from Entities.Enemies.enemy import Enemy
+import Entities.Enemies.enemyList as enemies
 import Base.events as events
-import Base.actions as actions
 import grid
 
 pygame.init()
@@ -16,7 +16,7 @@ running: bool = True
 
 clock = pygame.time.Clock()
 
-enemy = Enemy(enemies["Slime"], (128, 128))
+enemy = Enemy(enemies.slimeEnemyProperties)
 
 player = Player()
 

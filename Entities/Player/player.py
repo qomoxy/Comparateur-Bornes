@@ -1,18 +1,21 @@
 from Entities.Player.playerAnimations import PlayerAnimation
-from Entities.Player.playerClass import PlayerClass
 from Entities.Player.playerAbilitiesManager import PlayerAbilitiesManager
-from Abilities.abilities import Ability
 from Abilities.abilityEffects import EffectManager
 from Entities.entity import Entity
 
 
+class PlayerProperties():
+    def __init__(self, pEntity: Entity, pAbilitiesManager: PlayerAbilitiesManager) -> None:
+        self.pEntity = pEntity
+        self.pAbilitiesManager = pAbilitiesManager
+
+
 class Player():
 
-    def __init__(self) -> None:
-        self.pClass = PlayerClass("Player", "Mage", "")
-        self.pEntity = Entity(15, name="Player", info="The player", startPosition=(256, 256),
-                              baseSpeed=(3, 6), baseDefense=(3, 6), effectsToApply=EffectManager([]))
-        self.pAbilitiesManager = PlayerAbilitiesManager(self.pEntity)
+    def __init__(self, pProperties:  PlayerProperties) -> None:
+        self.pProperties = pProperties
+        self.pEntity = pProperties.pEntity
+        self.pAbilitiesManager = pProperties.pAbilitiesManager
         self.pAnims = PlayerAnimation()
 
     def Update(self, framerate: int):
